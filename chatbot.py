@@ -12,6 +12,12 @@
 
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
+# import corpus trainer that helps to train the bot
+from chatterbot.trainers import ChatterBotCorpusTrainer
+# NLTK is a leading platform for building Python programs to work with human language data
+# pip install --user -U nltk
+import nltk
+nltk.download('punkt')
 
 # Define the bot, create a new instance of a chatbot class
 # Pass parameters: name, read_only, logic adapters
@@ -56,3 +62,17 @@ for item in (small_talk, math_talk_1, math_talk_2):
     list_trainer.train(item)
 
 # The bot should now be trained and ready to communicate
+
+corpus_trainer = ChatterBotCorpusTrainer(bot)
+corpus_trainer.train('chatterbot.corpus.english')
+
+print(bot.get_response("hello"))
+# If there's an issue with print install this: pip install pytz
+
+while True:
+    try:
+        bot_input = input("You: ")
+        bot_response = bot.get_response(bot_input)
+        print(f"{bot.name}: {bot_response}")
+    except(KeyboardInterrupt, EOFError, SystemExit):
+        break

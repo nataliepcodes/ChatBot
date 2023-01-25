@@ -71,8 +71,8 @@ print(bot.get_response("hello"))
 
 while True:
     try:
-        bot_input = input("You: ")
+        bot_input = input("Human: ")
         bot_response = bot.get_response(bot_input)
-        print(f"{bot.name}: {bot_response}")
+        print(f"🤖{bot.name}: {bot_response}")
     except(KeyboardInterrupt, EOFError, SystemExit):
         break
